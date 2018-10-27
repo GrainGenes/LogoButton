@@ -18,21 +18,31 @@ define([
 return declare( JBrowsePlugin,
 {
     constructor: function( args ) {
-        console.log("plugin: LogoButton");
+        console.log("plugin: LogoButton",args);
 
         let thisB = this;
         let browser = this.browser;
         let conf = browser.config;
         let dataRoot = conf.baseUrl + conf.dataRoot;
-        console.log('plugin:',getPluginConf(),dataRoot);
+
+        let dialogTitle = "Information";
+        let logoFile = "plugins/LogoButton/GG3-2.png";
+
+        // if arg.logo is defined, reference the logo in the data directory
+        if (args.logo) logoFile = conf.dataRoot + '/' + args.logo;
+
+        // use custom dialog title
+        if (args.dialogTitle) dialogTitle = args.dialogTitle;
+
+        //console.log('plugin-config',getPluginConf(),dataRoot);
 
         // create function intercept after view initialization (because the view object doesn't exist before that)
         browser.afterMilestone( 'initView', function() {
 
             console.log("initView");
             $('div.menuBar').prepend(
-                '<span class="dijit dijitReset dijitInline menu"><img src="plugins/LogoButton/img/GG3-2.png" style="height:25px"/></span>'+
-                '<div id="infoDialog" title="Information"></div>'
+                '<span class="dijit dijitReset dijitInline menu"><img id="logoInfoImage" src="'+logoFile+'" /></span>'+
+                '<div id="infoDialog" title="'+dialogTitle+'"></div>'
             );
 
             $( function() {
@@ -58,7 +68,13 @@ return declare( JBrowsePlugin,
 
                             $( "#infoDialog" ).html( msg );
                         }
-                    });
+                        $("#infoDialogClose").on( "click", function() {
+                            $( "#infoDialog" ).dialog( "close" );
+                        });
+                        $("#logoInfoImage").on( "click", function() {
+                            $( "#infoDialog" ).dialog( "open" );
+                        });
+                });
                   }          
                 });
             });
@@ -74,7 +90,7 @@ return declare( JBrowsePlugin,
             let hasPlugin = false;
             plugins.forEach(function(item) {
                 console.log(item,typeof item);
-                if (item === "LogoButton") hasPlugin = item;
+                if (item==="LogoButton" || item.name==="LogoButton") hasPlugin = item;
             });
             return hasPlugin;
         };
