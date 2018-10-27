@@ -8,3 +8,21 @@ Add the following to index.html in the JBrowse root directory.
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 ```
+
+### Plugin Configuration
+
+Standard configuration:
+```
+   "plugins" : ["LogoButton"],
+```
+
+Extended configuration options:
+```
+   "plugins" : [
+      {
+        "name": "LogoButton",
+        "logo":"GG3-2.png", (image in data root)
+        "dialogTitle":"Assembly Information"  
+      }
+   ],
+```
