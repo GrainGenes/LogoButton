@@ -41,7 +41,7 @@ return declare( JBrowsePlugin,
 
             console.log("initView");
             $('div.menuBar').prepend(
-                '<span class="dijit dijitReset dijitInline menu"><img id="logoInfoImage" src="'+logoFile+'" /></span>'+
+                '<span class="dijit dijitReset dijitInline menu"><img title="'+dialogTitle+'" id="logoInfoImage" src="'+logoFile+'" /></span>'+
                 '<div id="infoDialog" title="'+dialogTitle+'"></div>'
             );
 
