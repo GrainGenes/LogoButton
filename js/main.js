@@ -28,8 +28,10 @@ return declare( JBrowsePlugin,
         let dialogTitle = args.dialogTitle || "Information";
         let logoFile = args.logoFile || "plugins/LogoButton/GG3-2.png";
         let logoURL = "http://github.com/nuggetry/logobutton-jbplugin";
-        let hasInfoButton = args.hasInfoButton || true;
-        let showInfoButton = args.showInfoButton || true;
+        let hasInfoButton = args.hasInfoButton || false;
+        let showInfoDialog = args.showInfoDialog || false;
+
+        console.log("showInfoDialog",typeof showInfoDialog,"hasInfoButton",typeof hasInfoButton);
 
         // if arg.logo is defined, reference the logo in the data directory
         if (args.logo) logoFile = conf.dataRoot + '/' + args.logo;
@@ -44,12 +46,13 @@ return declare( JBrowsePlugin,
         browser.afterMilestone( 'initView', function() {
 
             //console.log("initView");
-            let logoImg = '<span class="dijit dijitReset dijitInline menu"><img title="'+logoText+'" id="logoInfoImage" src="'+logoFile+'" /></span>';
+            let logoImg = '<span class="dijit dijitReset dijitInline menu"><img title="'+logoText+'" id="logoInfoImage" src="'+logoFile+'" /></span>'+
+                '<div id="infoDialog" title="'+dialogTitle+'"></div>';
                 
             let infoBtn = '<button id="infoButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="'+dialogTitle+'">'+
-                '  <span class="ui-icon ui-icon-triangle-1-s"></span>b'+
-                '</button>'+
-                '<div id="infoDialog" title="'+dialogTitle+'"></div>';
+                '  <span class="ui-icon ui-icon-info"></span>b'+
+                '</button>';
+
 
             $('div.menuBar').prepend(logoImg);
             
@@ -60,10 +63,13 @@ return declare( JBrowsePlugin,
                     $('div.menuBar').prepend(infoBtn);
             }
 
+            if (hasInfoButton)
+                $('div.dataset-name').prop('title',dialogTitle);
+
             $( function() {
                 $( "#infoDialog" ).dialog({
                   modal: true,
-                  autoOpen: showInfoButton,
+                  autoOpen: showInfoDialog,
                   width: 1000,
                   show: {
                     effect: "scale",
@@ -83,29 +89,28 @@ return declare( JBrowsePlugin,
 
                             $( "#infoDialog" ).html( msg );
                         }
-                        $("#logoInfoImage").on( "click", function() {
-                            window.parent.location = logoURL;
-                        });
-                        if (hasInfoButton) {
-                            $("#infoDialogClose").on( "click", function() {
-                                $( "#infoDialog" ).dialog( "close" );
-                            });
-                            $("#infoButton").on( "click", function() {
-                                $( "#infoDialog" ).dialog( "open" );
-                            });
-                            $("div.dataset-name").on( "click", function() {
-                                $( "#infoDialog" ).dialog( "open" );
-                            });
-                        }
-                });
+
+                    });
                   }          
                 });
             });
             
-            //setTimeout(function() {
-            //    $("#infoDialog").dialog( "open" );
-            //},1000);
-
+            // setup click handling
+            $("#logoInfoImage").on( "click", function() {
+                window.parent.location = logoURL;
+            });
+            if (hasInfoButton) {
+                $("#infoDialogClose").on( "click", function() {
+                    $( "#infoDialog" ).dialog( "close" );
+                });
+                $("#infoButton").on( "click", function() {
+                    console.log("Info Button click");
+                    $( "#infoDialog" ).dialog( "open" );
+                });
+                $("div.dataset-name").on( "click", function() {
+                    $( "#infoDialog" ).dialog( "open" );
+                });
+            }
         }); 
         
         function getPluginConf() {
