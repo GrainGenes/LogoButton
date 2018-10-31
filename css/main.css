@@ -2,3 +2,9 @@
     height: 25px;
     cursor: pointer;
 }
+div.dataset-name {
+    cursor: pointer;
+}
+#infoButton {
+    display: inline-block;
+}
