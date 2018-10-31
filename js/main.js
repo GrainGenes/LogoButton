@@ -25,30 +25,45 @@ return declare( JBrowsePlugin,
         let conf = browser.config;
         let dataRoot = conf.baseUrl + conf.dataRoot;
 
-        let dialogTitle = "Information";
-        let logoFile = "plugins/LogoButton/GG3-2.png";
+        let dialogTitle = args.dialogTitle || "Information";
+        let logoFile = args.logoFile || "plugins/LogoButton/GG3-2.png";
+        let logoURL = "http://github.com/nuggetry/logobutton-jbplugin";
+        let hasInfoButton = args.hasInfoButton || true;
+        let showInfoButton = args.showInfoButton || true;
 
         // if arg.logo is defined, reference the logo in the data directory
         if (args.logo) logoFile = conf.dataRoot + '/' + args.logo;
 
-        // use custom dialog title
-        if (args.dialogTitle) dialogTitle = args.dialogTitle;
-
-        //console.log('plugin-config',getPluginConf(),dataRoot);
+        if (args.logoURL) {
+            logoURL = args.logoURL;
+            logoText = args.logoUrl;
+        }
+        let logoText = args.logoText || "Plugin on Github";
 
         // create function intercept after view initialization (because the view object doesn't exist before that)
         browser.afterMilestone( 'initView', function() {
 
-            console.log("initView");
-            $('div.menuBar').prepend(
-                '<span class="dijit dijitReset dijitInline menu"><img title="'+dialogTitle+'" id="logoInfoImage" src="'+logoFile+'" /></span>'+
-                '<div id="infoDialog" title="'+dialogTitle+'"></div>'
-            );
+            //console.log("initView");
+            let logoImg = '<span class="dijit dijitReset dijitInline menu"><img title="'+logoText+'" id="logoInfoImage" src="'+logoFile+'" /></span>';
+                
+            let infoBtn = '<button id="infoButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="'+dialogTitle+'">'+
+                '  <span class="ui-icon ui-icon-triangle-1-s"></span>b'+
+                '</button>'+
+                '<div id="infoDialog" title="'+dialogTitle+'"></div>';
+
+            $('div.menuBar').prepend(logoImg);
+            
+            if (hasInfoButton){
+                if ($('div.dataset-name'))
+                    $(infoBtn).insertAfter('div.dataset-name');
+                else
+                    $('div.menuBar').prepend(infoBtn);
+            }
 
             $( function() {
                 $( "#infoDialog" ).dialog({
                   modal: true,
-                  autoOpen: true,
+                  autoOpen: showInfoButton,
                   width: 1000,
                   show: {
                     effect: "scale",
@@ -68,12 +83,20 @@ return declare( JBrowsePlugin,
 
                             $( "#infoDialog" ).html( msg );
                         }
-                        $("#infoDialogClose").on( "click", function() {
-                            $( "#infoDialog" ).dialog( "close" );
-                        });
                         $("#logoInfoImage").on( "click", function() {
-                            $( "#infoDialog" ).dialog( "open" );
+                            window.parent.location = logoURL;
                         });
+                        if (hasInfoButton) {
+                            $("#infoDialogClose").on( "click", function() {
+                                $( "#infoDialog" ).dialog( "close" );
+                            });
+                            $("#infoButton").on( "click", function() {
+                                $( "#infoDialog" ).dialog( "open" );
+                            });
+                            $("div.dataset-name").on( "click", function() {
+                                $( "#infoDialog" ).dialog( "open" );
+                            });
+                        }
                 });
                   }          
                 });
