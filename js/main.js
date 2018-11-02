@@ -88,11 +88,13 @@ return declare( JBrowsePlugin,
                                 msg += "<p>Place pageinfo.html in the data root.  This will be displayed in the this dialog box upon launch.";
 
                             $( "#infoDialog" ).html( msg );
-
+                        }
+                        setTimeout(function() {
                             $("#infoDialogClose").on( "click", function() {
                                 $( "#infoDialog" ).dialog( "close" );
                             });
-                    });
+                        },1000);
+                });
                 }          
             });
         });
