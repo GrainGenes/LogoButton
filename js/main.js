@@ -30,6 +30,8 @@ return declare( JBrowsePlugin,
         let logoURL = "http://github.com/nuggetry/logobutton-jbplugin";
         let hasInfoButton = args.hasInfoButton || false;
         let showInfoDialog = args.showInfoDialog || false;
+        let showMethod = args.showMethod || "scale";
+
 
         console.log("showInfoDialog",typeof showInfoDialog,"hasInfoButton",typeof hasInfoButton);
 
@@ -70,16 +72,14 @@ return declare( JBrowsePlugin,
                 modal: true,
                 dialogClass: "no-titlebar",
                 autoOpen: showInfoDialog,
-                position:{my:"right top", at:"right top", of:"#overview"},
-                //position:{my:"right top", at:"right top", of:".trackContainer"},
                 width: 1000,
                 show: {
-                effect: "slideDown",            //"scale",
-                duration: 1000
+                    effect: showMethod,            // default "scale"
+                    duration: 1000
                 },
                 hide: {
-                effect: "slideUp",             //"scale",
-                duration: 1000
+                    effect: showMethod,            // default "scale"
+                    duration: 1000
                 },
                 open: function () {
                     $(this).load(dataRoot+'/pageinfo.html',function( response, status, xhr) {
@@ -98,6 +98,11 @@ return declare( JBrowsePlugin,
                     });
                 }          
             }
+            if (showMethod==="slideDown") {
+                options.hide.effect = "slideUp";
+                options.position = {my:"right top", at:"right top", of:"#overview"};
+            }
+
             $( "#infoDialog" ).dialog(options);
         });
         
