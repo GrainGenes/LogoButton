@@ -45,42 +45,42 @@ return declare( JBrowsePlugin,
         // create function intercept after view initialization (because the view object doesn't exist before that)
         browser.afterMilestone( 'initView', function() {
 
-            //console.log("initView");
-            let logoImg = '<span class="dijit dijitReset dijitInline menu"><img title="'+logoText+'" id="logoInfoImage" src="'+logoFile+'" /></span>'+
-                '<div id="infoDialog" title="'+dialogTitle+'"></div>';
-                
-            let infoBtn = '<button id="infoButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="'+dialogTitle+'">'+
-                '  <span class="ui-icon ui-icon-info"></span>b'+
-                '</button>';
-
-
-            $('div.menuBar').prepend(logoImg);
+        //console.log("initView");
+        let logoImg = '<span class="dijit dijitReset dijitInline menu"><img title="'+logoText+'" id="logoInfoImage" src="'+logoFile+'" /></span>';
             
-            if (hasInfoButton){
-                if ($('div.dataset-name'))
-                    $(infoBtn).insertAfter('div.dataset-name');
-                else
-                    $('div.menuBar').prepend(infoBtn);
-            }
+        let infoBtn = '<button id="infoButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="'+dialogTitle+'">'+
+        '  <span class="ui-icon ui-icon-info"></span> i '+
+        '</button>'+
+        '<div id="infoDialog" title="'+dialogTitle+'"></div>';
 
-            if (hasInfoButton)
-                $('div.dataset-name').prop('title',dialogTitle);
+        $('div.menuBar').prepend(logoImg);
+        
+        if (hasInfoButton){
+            if ($('div.dataset-name'))
+                $(infoBtn).insertAfter('div.dataset-name');
+            else
+                $('div.menuBar').prepend(infoBtn);
+        }
 
-            $( function() {
-                $( "#infoDialog" ).dialog({
-                  modal: true,
-                  autoOpen: showInfoDialog,
-                  width: 1000,
-                  show: {
-                    effect: "scale",
-                    duration: 1000
-                  },
-                  hide: {
-                    effect: "scale",
-                    duration: 1000
-                  },
-                  open: function ()
-                  {
+        if (hasInfoButton)
+            $('div.dataset-name').prop('title',dialogTitle);
+
+        $( function() {
+            $( "#infoDialog" ).dialog({
+                modal: true,
+                dialogClass: "no-titlebar",
+                autoOpen: showInfoDialog,
+                position:{my:"top right", at:"top right", of:".trackContainer"},
+                width: 1000,
+                show: {
+                effect: "scale",
+                duration: 1000
+                },
+                hide: {
+                effect: "scale",
+                duration: 1000
+                },
+                open: function () {
                     $(this).load(dataRoot+'/pageinfo.html',function( response, status, xhr) {
                         if ( status == "error" ) {
                             let msg = "<p>pageinfo.html: " + xhr.status + " " + xhr.statusText + "</p>";
@@ -88,21 +88,20 @@ return declare( JBrowsePlugin,
                                 msg += "<p>Place pageinfo.html in the data root.  This will be displayed in the this dialog box upon launch.";
 
                             $( "#infoDialog" ).html( msg );
-                        }
 
+                            $("#infoDialogClose").on( "click", function() {
+                                $( "#infoDialog" ).dialog( "close" );
+                            });
                     });
-                  }          
-                });
+                }          
             });
-            
-            // setup click handling
-            $("#logoInfoImage").on( "click", function() {
-                window.parent.location = logoURL;
-            });
-            if (hasInfoButton) {
-                $("#infoDialogClose").on( "click", function() {
-                    $( "#infoDialog" ).dialog( "close" );
-                });
+        });
+        
+        // setup click handling
+        $("#logoInfoImage").on( "click", function() {
+            window.parent.location = logoURL;
+        });
+        if (hasInfoButton) {
                 $("#infoButton").on( "click", function() {
                     console.log("Info Button click");
                     $( "#infoDialog" ).dialog( "open" );

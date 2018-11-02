@@ -8,3 +8,6 @@ div.dataset-name {
 #infoButton {
     display: inline-block;
 }
+.no-titlebar .ui-dialog-titlebar {
+    display:none;
+}  
