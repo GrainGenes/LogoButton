@@ -66,18 +66,19 @@ return declare( JBrowsePlugin,
             $('div.dataset-name').prop('title',dialogTitle);
 
         $( function() {
-            $( "#infoDialog" ).dialog({
+            let options = {
                 modal: true,
                 dialogClass: "no-titlebar",
                 autoOpen: showInfoDialog,
-                position:{my:"top right", at:"top right", of:".trackContainer"},
+                position:{my:"right top", at:"right top", of:"#overview"},
+                //position:{my:"right top", at:"right top", of:".trackContainer"},
                 width: 1000,
                 show: {
-                effect: "scale",
+                effect: "slideDown",            //"scale",
                 duration: 1000
                 },
                 hide: {
-                effect: "scale",
+                effect: "slideUp",             //"scale",
                 duration: 1000
                 },
                 open: function () {
@@ -94,9 +95,10 @@ return declare( JBrowsePlugin,
                                 $( "#infoDialog" ).dialog( "close" );
                             });
                         },1000);
-                });
+                    });
                 }          
-            });
+            }
+            $( "#infoDialog" ).dialog(options);
         });
         
         // setup click handling
