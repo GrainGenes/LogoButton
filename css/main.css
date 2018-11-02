@@ -9,5 +9,5 @@ div.dataset-name {
     display: inline-block;
 }
 .no-titlebar .ui-dialog-titlebar {
-    display:none;
+/*    display:none; */
 }  
