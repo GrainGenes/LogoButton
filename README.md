@@ -22,7 +22,12 @@ Extended configuration options:
       {
         "name": "LogoButton",
         "logo":"GG3-2.png", (image in data root)
-        "dialogTitle":"Assembly Information"  
+        "logoURL":"http://wheat.pw.usda.gov",
+        "logoText": "goto GrainGenes home",
+        "dialogTitle":"Assembly Information",
+        "showInfoDialog":true,
+        "hasInfoButton":true,
+        "showMethod":"slideDown" (can also be any JQuery UI effect, "scale","blind", etc.)
       }
    ],
 ```
