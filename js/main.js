@@ -47,7 +47,7 @@ return declare( JBrowsePlugin,
         // create function intercept after view initialization (because the view object doesn't exist before that)
         browser.afterMilestone( 'initView', function() {
 
-        //console.log("initView");
+        console.log("infobutton initView",logoURL);
         let logoImg = '<span class="dijit dijitReset dijitInline menu"><img title="'+logoText+'" id="logoInfoImage" src="'+logoFile+'" /></span>';
             
         let infoBtn = '<button id="infoButton" class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="'+dialogTitle+'">'+
@@ -72,7 +72,7 @@ return declare( JBrowsePlugin,
                 modal: true,
                 dialogClass: "no-titlebar",
                 autoOpen: showInfoDialog,
-                width: 1000,
+                width: 600,
                 show: {
                     effect: showMethod,            // default "scale"
                     duration: 1000
@@ -82,6 +82,7 @@ return declare( JBrowsePlugin,
                     duration: 1000
                 },
                 open: function () {
+					console.log("opening infobox");
                     $(this).load(dataRoot+'/pageinfo.html',function( response, status, xhr) {
                         if ( status == "error" ) {
                             let msg = "<p>pageinfo.html: " + xhr.status + " " + xhr.statusText + "</p>";

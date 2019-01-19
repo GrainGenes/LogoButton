@@ -7,7 +7,12 @@ div.dataset-name {
 }
 #infoButton {
     display: inline-block;
+	position: relative;
+	right: 145px;
 }
 .no-titlebar .ui-dialog-titlebar {
 /*    display:none; */
 }  
+.ui-dialog-titlebar-close {
+	display:none;
+}
