@@ -103,6 +103,11 @@ return declare( JBrowsePlugin,
                 options.hide.effect = "slideUp";
                 options.position = {my:"right top", at:"right top", of:"#overview"};
             }
+			if (showMethod==="highlight") {
+				options.hide.effect = "";
+				options.hide.duration = 10;
+				options.show.duration = 10;
+			}
 
             $( "#infoDialog" ).dialog(options);
         });
