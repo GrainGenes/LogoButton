@@ -84,6 +84,12 @@ return declare( JBrowsePlugin,
                 },
                 open: function () {
 					console.log("opening infobox",dataRoot);
+					$("<link/>", {
+					   rel: "stylesheet",
+					   type: "text/css",
+					   href: dataRoot+"/pageinfo.css"
+					}).appendTo("head");					
+					
                     $(this).load(dataRoot+'/pageinfo.html',function( response, status, xhr) {
                         if ( status == "error" ) {
                             let msg = "<p>pageinfo.html: " + xhr.status + " " + xhr.statusText + "</p>";
