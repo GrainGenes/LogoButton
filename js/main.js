@@ -24,6 +24,7 @@ return declare( JBrowsePlugin,
         let browser = this.browser;
         let conf = browser.config;
         let dataRoot = conf.baseUrl + conf.dataRoot;
+        dataRoot = conf.dataRoot;
 
         let dialogTitle = args.dialogTitle || "Information";
         let logoFile = args.logoFile || "plugins/LogoButton/GG3-2.png";
@@ -72,7 +73,7 @@ return declare( JBrowsePlugin,
                 modal: true,
                 dialogClass: "no-titlebar",
                 autoOpen: showInfoDialog,
-                width: 600,
+                width: 1000,
                 show: {
                     effect: showMethod,            // default "scale"
                     duration: 1000
@@ -82,7 +83,7 @@ return declare( JBrowsePlugin,
                     duration: 1000
                 },
                 open: function () {
-					console.log("opening infobox");
+					console.log("opening infobox",dataRoot);
                     $(this).load(dataRoot+'/pageinfo.html',function( response, status, xhr) {
                         if ( status == "error" ) {
                             let msg = "<p>pageinfo.html: " + xhr.status + " " + xhr.statusText + "</p>";
@@ -105,7 +106,9 @@ return declare( JBrowsePlugin,
                 options.hide.effect = "slideUp";
                 options.position = {my:"right top", at:"right top", of:"#overview"};
             }
-
+			options.hide.duration = 300;
+			options.show.duration = 300;
+			
             $( "#infoDialog" ).dialog(options);
         });
         
