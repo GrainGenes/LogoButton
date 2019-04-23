@@ -92,7 +92,9 @@ return declare( JBrowsePlugin,
                             $( "#infoDialog" ).html( msg );
                         }
                         setTimeout(function() {
+							console.log("timeout");
                             $("#infoDialogClose").on( "click", function() {
+								console.log("close");
                                 $( "#infoDialog" ).dialog( "close" );
                             });
                         },1000);
