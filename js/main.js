@@ -33,6 +33,11 @@ return declare( JBrowsePlugin,
         let showInfoDialog = args.showInfoDialog || false;
         let showMethod = args.showMethod || "scale";
 
+		let animShowTime = args.animShowTime || 300;
+		let animHideTime = args.animHideTime || 300;
+		
+		let dialogWidth = args.dialogWidth || 1000;
+
 
         console.log("showInfoDialog",typeof showInfoDialog,"hasInfoButton",typeof hasInfoButton);
 
@@ -73,14 +78,14 @@ return declare( JBrowsePlugin,
                 modal: true,
                 dialogClass: "no-titlebar",
                 autoOpen: showInfoDialog,
-                width: 1000,
+                width: dialogWidth,
                 show: {
                     effect: showMethod,            // default "scale"
-                    duration: 1000
+                    duration: animShowTime
                 },
                 hide: {
                     effect: showMethod,            // default "scale"
-                    duration: 1000
+                    duration: animHideTime
                 },
                 open: function () {
 					console.log("opening infobox",dataRoot);
@@ -112,8 +117,6 @@ return declare( JBrowsePlugin,
                 options.hide.effect = "slideUp";
                 options.position = {my:"right top", at:"right top", of:"#overview"};
             }
-			options.hide.duration = 300;
-			options.show.duration = 300;
 			
             $( "#infoDialog" ).dialog(options);
         });

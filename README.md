@@ -11,6 +11,8 @@ Add the following to index.html in the JBrowse root directory.
 
 ### Plugin Configuration
 
+In the dataset's trackList.json, plugin configuration:
+
 Standard configuration:
 ```
    "plugins" : ["LogoButton"],
@@ -21,13 +23,16 @@ Extended configuration options:
    "plugins" : [
       {
         "name": "LogoButton",
-        "logo":"GG3-2.png", (image in data root)
+        "logo":"GG3-2.png", (image in dataset root)
         "logoURL":"http://wheat.pw.usda.gov",
         "logoText": "goto GrainGenes home",
         "dialogTitle":"Assembly Information",
         "showInfoDialog":true,
         "hasInfoButton":true,
         "showMethod":"slideDown" (can also be any JQuery UI effect, "scale","blind", etc.)
+		"animShowTime": 300, (milliseconds)
+		"animHideTime": 300, (milliseconds)
+		"dialogWidth":1000   (pixels)
       }
    ],
 ```
