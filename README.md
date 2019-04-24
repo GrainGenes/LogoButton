@@ -36,3 +36,14 @@ Extended configuration options:
       }
    ],
 ```
+### pageinfo.html Example
+Includes method of implementing a close button.
+```
+<div>
+    Click for more info about the operations of the demo: 
+    <a class="ui-button ui-widget ui-corner-all" target="_blank" href="https://jblast.readthedocs.io/en/latest/features.html#jblast-brief-tutorial">View Demo Guide</a>
+
+    <button id="infoDialogClose" class="ui-button ui-widget ui-corner-all">Close</button>
+
+</div>
+```
