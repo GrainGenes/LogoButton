@@ -35,7 +35,7 @@ Extended configuration options:
         "dialogWidth":1000,  (pixels)
         "hideTitle": false,
         "autoHide": 5000,    (miliseconds),
-		"flashButton": true  (flashes the info button)
+        "flashButton": true  (flashes the info button)
       }
    ],
 ```
