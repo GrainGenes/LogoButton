@@ -38,6 +38,7 @@ return declare( JBrowsePlugin,
 		
 		let dialogWidth = args.dialogWidth || 1000;
 		let hideTitle = args.hideTitle || false;
+		let autoHide = args.autoHide || false;
 
 		let dialogClass = hideTitle ? "no-titlebar" : "";
 
@@ -122,6 +123,12 @@ return declare( JBrowsePlugin,
             }
 			
             $( "#infoDialog" ).dialog(options);
+			
+			if (autoHide) {
+				setTimeout(function() {
+                    $( "#infoDialog" ).dialog( "close" );
+				},autoHide);
+			}
         });
         
         // setup click handling

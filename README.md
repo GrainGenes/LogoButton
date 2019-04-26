@@ -33,7 +33,8 @@ Extended configuration options:
         "animShowTime": 300, (milliseconds)
         "animHideTime": 300, (milliseconds)
         "dialogWidth":1000,  (pixels)
-        "hideTitle": false
+        "hideTitle": false,
+        "autoHide": 5000     (miliseconds)
       }
    ],
 ```
