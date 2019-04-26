@@ -30,9 +30,10 @@ Extended configuration options:
         "showInfoDialog":true,
         "hasInfoButton":true,
         "showMethod":"slideDown" (can also be any JQuery UI effect, "scale","blind", etc.)
-		"animShowTime": 300, (milliseconds)
-		"animHideTime": 300, (milliseconds)
-		"dialogWidth":1000   (pixels)
+        "animShowTime": 300, (milliseconds)
+        "animHideTime": 300, (milliseconds)
+        "dialogWidth":1000,  (pixels)
+		"hideTitle": false
       }
    ],
 ```

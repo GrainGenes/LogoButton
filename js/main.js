@@ -37,9 +37,12 @@ return declare( JBrowsePlugin,
 		let animHideTime = args.animHideTime || 300;
 		
 		let dialogWidth = args.dialogWidth || 1000;
+		let hideTitle = args.hideTitle || false;
+
+		let dialogClass = hideTitle ? "no-titlebar" : "";
 
 
-        console.log("showInfoDialog",typeof showInfoDialog,"hasInfoButton",typeof hasInfoButton);
+        //console.log("showInfoDialog",typeof showInfoDialog,"hasInfoButton",typeof hasInfoButton);
 
         // if arg.logo is defined, reference the logo in the data directory
         if (args.logo) logoFile = conf.dataRoot + '/' + args.logo;
@@ -76,7 +79,7 @@ return declare( JBrowsePlugin,
         $( function() {
             let options = {
                 modal: true,
-                dialogClass: "no-titlebar",
+                dialogClass: dialogClass,
                 autoOpen: showInfoDialog,
                 width: dialogWidth,
                 show: {
