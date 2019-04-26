@@ -39,6 +39,7 @@ return declare( JBrowsePlugin,
 		let dialogWidth = args.dialogWidth || 1000;
 		let hideTitle = args.hideTitle || false;
 		let autoHide = args.autoHide || false;
+		let flashButton = args.flashInfoButton || true;
 
 		let dialogClass = hideTitle ? "no-titlebar" : "";
 
@@ -112,6 +113,8 @@ return declare( JBrowsePlugin,
                             $("#infoDialogClose").on( "click", function() {
 								console.log("close");
                                 $( "#infoDialog" ).dialog( "close" );
+								
+								if (flashButton)	flashInfoButton();
                             });
                         },1000);
                     });
@@ -127,6 +130,7 @@ return declare( JBrowsePlugin,
 			if (autoHide) {
 				setTimeout(function() {
                     $( "#infoDialog" ).dialog( "close" );
+					if (flashButton) flashInfoButton();
 				},autoHide);
 			}
         });
@@ -155,6 +159,16 @@ return declare( JBrowsePlugin,
             });
             return hasPlugin;
         };
+		function flashInfoButton() {
+			$("#infoButton")
+			.fadeIn(100).fadeOut(100).fadeIn(100)
+			.fadeOut(100).fadeIn(100)
+			.fadeOut(100).fadeIn(100)
+			.fadeOut(100).fadeIn(100)
+			.fadeOut(100).fadeIn(100)
+			.fadeOut(100).fadeIn(100)
+			.fadeOut(100).fadeIn(100);
+		}
     }
     
 });

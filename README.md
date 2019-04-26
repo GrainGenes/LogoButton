@@ -34,7 +34,8 @@ Extended configuration options:
         "animHideTime": 300, (milliseconds)
         "dialogWidth":1000,  (pixels)
         "hideTitle": false,
-        "autoHide": 5000     (miliseconds)
+        "autoHide": 5000,    (miliseconds),
+		"flashButton": true  (flashes the info button)
       }
    ],
 ```

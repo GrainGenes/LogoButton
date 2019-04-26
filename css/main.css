@@ -7,7 +7,7 @@ div.dataset-name {
 }
 #infoButton {
 	position: relative;
-	right: 155px;
+	right: 145px;
 }
 div.no-titlebar[aria-describedby="infoDialog"] > div.ui-dialog-titlebar {
 	display: none;
