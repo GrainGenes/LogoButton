@@ -47,7 +47,10 @@ return declare( JBrowsePlugin,
         //console.log("showInfoDialog",typeof showInfoDialog,"hasInfoButton",typeof hasInfoButton);
 
         // if arg.logo is defined, reference the logo in the data directory
-        if (args.logo) logoFile = conf.dataRoot + '/' + args.logo;
+        if (args.logo && args.logo.includes('/'))
+            logoFile = args.logo;
+        else if (args.logo) 
+            logoFile = conf.dataRoot + '/' + args.logo;
 
         if (args.logoURL) {
             logoURL = args.logoURL;
